@@ -11,3 +11,5 @@ class Task(Base):
 
 
     completed = Column(Boolean, default)
+
+#look into potential feautures like priority or tags

@@ -6,7 +6,7 @@ class TaskCreate(BaseModel):
     note: str | None = None
 
 class TaskUpdate(BaseModel):
-    title: str
+    title: str | None = None
     note: str | None = None
     completed: bool | None = None
 

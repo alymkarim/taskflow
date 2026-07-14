@@ -10,10 +10,7 @@ delete_task()  → remove a task'''
 #create
 
 def create_task(db: Session, task: schemas.TaskCreate):
-    db_task = models.Task(
-        title=task.title,
-        note=task.note,
-    )
+    db_task = models.Task(**task.model_dump())
 
     db.add(db_task)
     db.commit()
@@ -22,6 +19,7 @@ def create_task(db: Session, task: schemas.TaskCreate):
     return db_task
 
 #read
+
 def get_tasks(db: Session):
     return db.query(models.Task).all()
 
@@ -32,17 +30,6 @@ def get_task(db: Session, task_id: int):
 #update
 
 def update_task(db: Session, task_id: int, task_update: schemas.TaskUpdate):
-    return (
-        db.query(models.Task)
-        .filter(models.Task.id == task_id)
-        .first()
-    )
-
-def update_task(
-    db: Session,
-    task_id: int,
-    task_update: schemas.TaskUpdate,
-):
     db_task = get_task(db, task_id)
 
     if db_task is None:
@@ -59,6 +46,7 @@ def update_task(
     return db_task
 
 #delete
+
 def delete_task(db: Session, task_id: int):
     db_task = get_task(db, task_id)
 

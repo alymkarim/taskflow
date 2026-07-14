@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-<<<<<<< Updated upstream
 from . import models, schemas
 
 '''create_task()  → add a task
@@ -8,21 +7,10 @@ get_task()     → get one task by id
 update_task()  → edit a task
 delete_task()  → remove a task'''
 
-//create
+#create
 
 def create_task(db: Session, task: schemas.TaskCreate):
     db_task = models.Task(**task.model_dump())
-=======
-
-from . import models, schemas
-
-
-def create_task(db: Session, task: schemas.TaskCreate):
-    db_task = models.Task(
-        title=task.title,
-        note=task.note,
-    )
->>>>>>> Stashed changes
 
     db.add(db_task)
     db.commit()
@@ -30,36 +18,18 @@ def create_task(db: Session, task: schemas.TaskCreate):
 
     return db_task
 
-<<<<<<< Updated upstream
-//read
-=======
->>>>>>> Stashed changes
+#read
 
 def get_tasks(db: Session):
     return db.query(models.Task).all()
 
 
 def get_task(db: Session, task_id: int):
-<<<<<<< Updated upstream
     return db.query(models.Task).filter(models.Task.id == task_id).first()
 
-//update
+#update
 
 def update_task(db: Session, task_id: int, task_update: schemas.TaskUpdate):
-=======
-    return (
-        db.query(models.Task)
-        .filter(models.Task.id == task_id)
-        .first()
-    )
-
-
-def update_task(
-    db: Session,
-    task_id: int,
-    task_update: schemas.TaskUpdate,
-):
->>>>>>> Stashed changes
     db_task = get_task(db, task_id)
 
     if db_task is None:
@@ -75,10 +45,7 @@ def update_task(
 
     return db_task
 
-<<<<<<< Updated upstream
-//delete
-=======
->>>>>>> Stashed changes
+#delete
 
 def delete_task(db: Session, task_id: int):
     db_task = get_task(db, task_id)

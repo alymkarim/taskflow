@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 from . import models, schemas
 
 '''create_task()  → add a task
@@ -13,6 +14,8 @@ delete_task()  → remove a task'''
 def create_task(db: Session, task: schemas.TaskCreate):
     db_task = models.Task(**task.model_dump())
 =======
+=======
+>>>>>>> Stashed changes
 
 from . import models, schemas
 
@@ -22,6 +25,9 @@ def create_task(db: Session, task: schemas.TaskCreate):
         title=task.title,
         note=task.note,
     )
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
     db.add(db_task)
@@ -31,7 +37,10 @@ def create_task(db: Session, task: schemas.TaskCreate):
     return db_task
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //read
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
@@ -41,12 +50,15 @@ def get_tasks(db: Session):
 
 def get_task(db: Session, task_id: int):
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     return db.query(models.Task).filter(models.Task.id == task_id).first()
 
 //update
 
 def update_task(db: Session, task_id: int, task_update: schemas.TaskUpdate):
 =======
+=======
+>>>>>>> Stashed changes
     return (
         db.query(models.Task)
         .filter(models.Task.id == task_id)
@@ -59,6 +71,9 @@ def update_task(
     task_id: int,
     task_update: schemas.TaskUpdate,
 ):
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     db_task = get_task(db, task_id)
 
@@ -76,7 +91,10 @@ def update_task(
     return db_task
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //delete
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 

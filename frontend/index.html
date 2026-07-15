@@ -1,119 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>TaskFlow</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <main class="app-container">
-        <header class="app-header">
-            <div>
-                <p class="eyebrow">Task manager</p>
-                <h1>TaskFlow</h1>
-                <p class="subtitle">
-                    Organise your tasks and notes in one place.
-                </p>
-            </div>
-        </header>
-
-        <section class="task-form-card">
-            <h2>Add a task</h2>
-
-            <form id="task-form">
-                <div class="form-group">
-                    <label for="task-title">Task title</label>
-
-                    <input
-                        id="task-title"
-                        name="title"
-                        type="text"
-                        placeholder="For example: Update GitHub"
-                        maxlength="150"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="task-note">Note</label>
-
-                    <textarea
-                        id="task-note"
-                        name="note"
-                        placeholder="Add optional details..."
-                        rows="4"
-                    ></textarea>
-                </div>
-
-                <p id="form-error" class="error-message"></p>
-
-                <button id="submit-button" type="submit">
-                    Add task
-                </button>
-            </form>
-        </section>
-
-        <section class="task-section">
-            <div class="task-section-header">
-                <div>
-                    <p class="eyebrow">Your work</p>
-                    <h2>Tasks</h2>
-                </div>
-
-                <span id="task-count" class="task-count">
-                    0 tasks
-                </span>
-            </div>
-
-            <div class="filters">
-                <button
-                    class="filter-button active"
-                    type="button"
-                    data-filter="all"
-                >
-                    All
-                </button>
-
-                <button
-                    class="filter-button"
-                    type="button"
-                    data-filter="active"
-                >
-                    Active
-                </button>
-
-                <button
-                    class="filter-button"
-                    type="button"
-                    data-filter="completed"
-                >
-                    Completed
-                </button>
-            </div>
-
-            <p id="loading-message" class="status-message">
-                Loading tasks...
-            </p>
-
-            <p id="api-error" class="error-message"></p>
-
-            <div id="task-list" class="task-list"></div>
-
-            <div id="empty-state" class="empty-state hidden">
-                <h3>No tasks found</h3>
-                <p>Add your first task using the form above.</p>
-            </div>
-        </section>
-    </main>
-
-    <script type="module" src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

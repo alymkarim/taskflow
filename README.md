@@ -2,7 +2,7 @@
 
 A full-stack task management application that enables users to create, organise, update, and delete tasks through a responsive web interface. The project features a React frontend communicating with a FastAPI REST API backed by a PostgreSQL database, showcasing modern full-stack application development from local development to cloud deployment.
 
-### 🌐 Live Demo
+### Live Demo
 
 **Application:** https://taskflow-six-sandy.vercel.app/
 
@@ -22,11 +22,12 @@ A full-stack task management application that enables users to create, organise,
 </div>
 
 ---
-## 🎥 Demo
+## Demo
 
 <p align="center">
-  <img src="docs/taskflow.gif" alt="TaskFlow Demo" width="900">
+  <img src="taskflow.gif" alt="TaskFlow Demo" width="900">
 </p>
+
 # Overview
 
 TaskFlow is a task management web application that allows users to manage their daily tasks through a simple and responsive interface. Users can create new tasks, add optional notes, mark tasks as completed, and remove tasks they no longer need.

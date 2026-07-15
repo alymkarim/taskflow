@@ -9,7 +9,4 @@ class Task(Base):
     note = Column(String, nullable=True)
     completed = Column(Boolean, default=False)
 
-
-    completed = Column(Boolean, default)
-
 #look into potential feautures like priority or tags

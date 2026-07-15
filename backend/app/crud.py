@@ -1,16 +1,16 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
 
-'''create_task()  → add a task
-get_alltasks()    → get all tasks
-get_task()     → get one task by id
-update_task()  → edit a task
-delete_task()  → remove a task'''
+from app import models, schemas
 
-#create
 
-def create_task(db: Session, task: schemas.TaskCreate):
-    db_task = models.Task(**task.model_dump())
+def create_task(
+    db: Session,
+    task: schemas.TaskCreate,
+):
+    db_task = models.Task(
+        title=task.title,
+        note=task.note,
+    )
 
     db.add(db_task)
     db.commit()
@@ -18,24 +18,38 @@ def create_task(db: Session, task: schemas.TaskCreate):
 
     return db_task
 
-#read
 
 def get_tasks(db: Session):
     return db.query(models.Task).all()
 
 
-def get_task(db: Session, task_id: int):
-    return db.query(models.Task).filter(models.Task.id == task_id).first()
+def get_task(
+    db: Session,
+    task_id: int,
+):
+    return (
+        db.query(models.Task)
+        .filter(models.Task.id == task_id)
+        .first()
+    )
 
-#update
 
-def update_task(db: Session, task_id: int, task_update: schemas.TaskUpdate):
-    db_task = get_task(db, task_id)
+def update_task(
+    db: Session,
+    task_id: int,
+    task_update: schemas.TaskUpdate,
+):
+    db_task = get_task(
+        db=db,
+        task_id=task_id,
+    )
 
     if db_task is None:
         return None
 
-    update_data = task_update.model_dump(exclude_unset=True)
+    update_data = task_update.model_dump(
+        exclude_unset=True
+    )
 
     for key, value in update_data.items():
         setattr(db_task, key, value)
@@ -45,10 +59,15 @@ def update_task(db: Session, task_id: int, task_update: schemas.TaskUpdate):
 
     return db_task
 
-#delete
 
-def delete_task(db: Session, task_id: int):
-    db_task = get_task(db, task_id)
+def delete_task(
+    db: Session,
+    task_id: int,
+):
+    db_task = get_task(
+        db=db,
+        task_id=task_id,
+    )
 
     if db_task is None:
         return None

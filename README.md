@@ -25,7 +25,7 @@ A full-stack task management application that enables users to create, organise,
 ## 🎥 Demo
 
 <p align="center">
-  <img src="docs/taskflow-demo.gif" alt="TaskFlow Demo" width="900">
+  <img src="docs/taskflow.gif" alt="TaskFlow Demo" width="900">
 </p>
 # Overview
 

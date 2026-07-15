@@ -1,95 +1,326 @@
-# TaskFlow
+<div align="center">
 
-A lightweight task management REST API built with FastAPI, SQLAlchemy, and Pydantic.
+# 🚀 TaskFlow
 
-## Features
+A modern full-stack task management application built with **FastAPI**, **React**, **TypeScript**, **PostgreSQL**, and **Docker**.
 
-* Create, view, update, and delete tasks through a REST API.
-* Store task data using SQLAlchemy with SQLite (PostgreSQL-ready).
-* Validate request and response data with Pydantic.
-* Interactive API documentation provided by FastAPI.
+Production-style CRUD application demonstrating REST APIs, database integration, testing, containerization, and cloud deployment.
 
-## Tech Stack
+### 🌐 Live Demo
 
-* Python 3.12+
-* FastAPI
-* SQLAlchemy
-* Pydantic
-* Uvicorn
-* SQLite
+**Application:** https://taskflow-six-sandy.vercel.app/
 
-## Project Structure
+**API Documentation:** https://taskflow-i5u3.onrender.com/docs
+
+<br>
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.116-009688?logo=fastapi&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-ORM-red)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-336791?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
+![Vercel](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel)
+![Render](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render)
+
+</div>
+
+---
+
+# Overview
+
+TaskFlow is a full-stack task management application built to demonstrate modern software engineering practices.
+
+The project separates the frontend and backend into independent services communicating through a REST API, while using PostgreSQL for persistent data storage.
+
+The application was containerized with Docker and deployed to the cloud using Vercel, Render, and Supabase.
+
+---
+
+# Features
+
+- ✅ Create tasks
+- ✅ View all tasks
+- ✅ Mark tasks as completed
+- ✅ Delete tasks
+- ✅ Responsive React frontend
+- ✅ RESTful API
+- ✅ PostgreSQL database
+- ✅ SQLAlchemy ORM
+- ✅ Pydantic validation
+- ✅ Docker containerization
+- ✅ Backend API testing
+- ✅ CRUD testing
+- ✅ Cloud deployment
+
+---
+
+# Tech Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- CSS
+
+## Backend
+
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- Uvicorn
+
+## Database
+
+- PostgreSQL (Supabase)
+
+## Deployment
+
+- Frontend → Vercel
+- Backend → Render
+- Database → Supabase
+
+## Testing
+
+- Pytest
+- FastAPI TestClient
+
+---
+
+# Architecture
 
 ```text
-backend/
-└── app/
-    ├── crud.py
-    ├── database.py
-    ├── main.py
-    ├── models.py
-    └── schemas.py
+                   React + TypeScript
+                    (Vercel Frontend)
+                            │
+                            │ HTTP Requests
+                            ▼
+                  FastAPI REST API
+                    (Render Backend)
+                            │
+                     SQLAlchemy ORM
+                            │
+                            ▼
+                 PostgreSQL Database
+                       (Supabase)
 ```
 
-## Installation
+---
 
-Clone the repository:
+# Project Structure
+
+```text
+taskflow/
+
+├── backend/
+│
+│   ├── app/
+│   │   ├── routers/
+│   │   ├── crud.py
+│   │   ├── database.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   └── schemas.py
+│   │
+│   ├── tests/
+│   │   ├── conftest.py
+│   │   ├── test_api.py
+│   │   └── test_crud.py
+│   │
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── .dockerignore
+│
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── types/
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   │
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+# Live Deployment
+
+| Service | URL |
+|----------|-----|
+| Frontend | https://taskflow-six-sandy.vercel.app/ |
+| Backend API | https://taskflow-i5u3.onrender.com |
+| Swagger Docs | https://taskflow-i5u3.onrender.com/docs |
+
+> **Note**
+>
+> The backend is hosted on Render's free tier. If the application has been inactive, the first request may take around 30–60 seconds while the backend wakes up.
+
+---
+
+# API Endpoints
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | `/tasks` | Retrieve all tasks |
+| POST | `/tasks` | Create a new task |
+| PATCH | `/tasks/{id}` | Update a task |
+| DELETE | `/tasks/{id}` | Delete a task |
+
+Swagger Documentation
+
+```
+https://taskflow-i5u3.onrender.com/docs
+```
+
+---
+
+# Running Locally
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/alymkarim/taskflow.git
+
 cd taskflow
 ```
 
-Create and activate a virtual environment:
+---
+
+## Backend
 
 ```bash
+cd backend
+
 python -m venv .venv
+
+source .venv/Scripts/activate
+
+pip install -r requirements.txt
+
+python -m uvicorn app.main:app --reload
 ```
 
-Linux/macOS:
+Backend
+
+```
+http://127.0.0.1:8000
+```
+
+Swagger
+
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+## Frontend
 
 ```bash
-source .venv/bin/activate
+cd frontend
+
+npm install
+
+npm run dev
 ```
 
-Windows (PowerShell):
+Frontend
 
-```powershell
-.venv\Scripts\Activate.ps1
+```
+http://localhost:5173
 ```
 
-Install dependencies:
+---
+
+# Docker
+
+Build backend image
 
 ```bash
-pip install -r backend/requirements.txt
+docker build -t taskflow-backend .
 ```
 
-## Run
-
-Start the development server:
+Run container
 
 ```bash
-uvicorn backend.app.main:app --reload
+docker run -p 8000:8000 taskflow-backend
 ```
 
-The API will be available at:
+---
 
-* http://127.0.0.1:8000
-* Swagger UI: http://127.0.0.1:8000/docs
-* ReDoc: http://127.0.0.1:8000/redoc
+# Testing
 
-## Roadmap
+Run all tests
 
-* User authentication
-* PostgreSQL support
-* Docker deployment
-* Task categories and priorities
-* Search and filtering
-* Automated tests
+```bash
+pytest
+```
 
-## Contributing
+Run API tests
 
-See `CONTRIBUTING.md` for contribution guidelines.
+```bash
+pytest tests/test_api.py
+```
 
-## License
+Run CRUD tests
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+```bash
+pytest tests/test_crud.py
+```
+
+---
+
+# Cloud Deployment
+
+| Component | Platform |
+|------------|----------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | Supabase PostgreSQL |
+| Containerization | Docker |
+
+---
+
+# Learning Outcomes
+
+This project provided hands-on experience with:
+
+- Building RESTful APIs with FastAPI
+- CRUD application architecture
+- SQLAlchemy ORM
+- PostgreSQL integration
+- API validation using Pydantic
+- Unit and API testing with Pytest
+- Docker containerization
+- Environment variable management
+- CORS configuration
+- Frontend–backend communication
+- Cloud deployment using Vercel, Render, and Supabase
+
+---
+
+# Future Improvements
+
+- User authentication
+- User-specific task ownership
+- JWT authentication
+- Password hashing
+- Search tasks
+- Task filtering
+- Due dates
+- Priority levels
+- Dark mode
+- Drag-and-drop ordering
+- Docker Compose
+- GitHub Actions CI/CD
+- Alembic database migrations
+
+---
+
+# License
+
+This project is licensed under the MIT License.

@@ -46,41 +46,53 @@ export default function TaskForm({
 
   return (
     <form
-      className="task-form"
       onSubmit={handleSubmit}
+      className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
     >
-      <label htmlFor="task-title">
-        Task title
-      </label>
+      <div>
+        <label
+          htmlFor="task-title"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
+          Task title
+        </label>
 
-      <input
-        id="task-title"
-        type="text"
-        value={title}
-        onChange={(event) =>
-          setTitle(event.target.value)
-        }
-        placeholder="What needs to be done?"
-        required
-      />
+        <input
+          id="task-title"
+          value={title}
+          onChange={(event) =>
+            setTitle(event.target.value)
+          }
+          placeholder="What needs to be done?"
+          required
+          className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+        />
+      </div>
 
-      <label htmlFor="task-note">
-        Note
-      </label>
+      <div>
+        <label
+          htmlFor="task-note"
+          className="mb-2 block text-sm font-semibold text-slate-700"
+        >
+          Note
+        </label>
 
-      <textarea
-        id="task-note"
-        value={note}
-        onChange={(event) =>
-          setNote(event.target.value)
-        }
-        placeholder="Add extra details"
-        rows={3}
-      />
+        <textarea
+          id="task-note"
+          value={note}
+          onChange={(event) =>
+            setNote(event.target.value)
+          }
+          placeholder="Add extra details"
+          rows={3}
+          className="w-full resize-y rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+        />
+      </div>
 
       <button
         type="submit"
         disabled={submitting}
+        className="w-full rounded-xl bg-slate-950 px-5 py-3 font-semibold text-white transition hover:bg-indigo-600 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {submitting ? "Adding..." : "Add task"}
       </button>

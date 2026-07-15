@@ -1,166 +1,89 @@
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useMemo, useState } from "react";
 
-import {
-  createTask,
-  deleteTask,
-  getTasks,
-  updateTask,
-} from "./api/tasks";
+import FilterBar, {
+  type TaskFilter,
+} from "./components/FilterBar";
 
+import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 
-import type { Task } from "./types/task";
-
-import "./App.css";
+import { useTasks } from "./hooks/useTasks";
 
 export default function App() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [loading, setLoading] = useState(true);
+  const {
+    tasks,
+    loading,
+    error,
+    addTask,
+    toggleTask,
+    removeTask,
+  } = useTasks();
 
-  const [error, setError] = useState<
-    string | null
-  >(null);
-
-  useEffect(() => {
-    async function loadTasks() {
-      try {
-        setError(null);
-
-        const taskData = await getTasks();
-
-        setTasks(taskData);
-      } catch (error) {
-        setError(
-          error instanceof Error
-            ? error.message
-            : "Could not load tasks",
-        );
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    void loadTasks();
-  }, []);
-
-  async function handleCreate(
-    title: string,
-    note: string | null,
-  ) {
-    try {
-      setError(null);
-
-      const newTask = await createTask({
-        title,
-        note,
-      });
-
-      setTasks((currentTasks) => [
-        ...currentTasks,
-        newTask,
-      ]);
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Could not create task",
-      );
-
-      throw error;
-    }
-  }
-
-  async function handleToggle(task: Task) {
-    try {
-      setError(null);
-
-      const updatedTask = await updateTask(
-        task.id,
-        {
-          completed: !task.completed,
-        },
-      );
-
-      setTasks((currentTasks) =>
-        currentTasks.map((currentTask) =>
-          currentTask.id === updatedTask.id
-            ? updatedTask
-            : currentTask,
-        ),
-      );
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Could not update task",
-      );
-    }
-  }
-
-  async function handleDelete(taskId: number) {
-    try {
-      setError(null);
-
-      await deleteTask(taskId);
-
-      setTasks((currentTasks) =>
-        currentTasks.filter(
-          (task) => task.id !== taskId,
-        ),
-      );
-    } catch (error) {
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Could not delete task",
-      );
-    }
-  }
+  const [filter, setFilter] =
+    useState<TaskFilter>("all");
 
   const completedCount = tasks.filter(
     (task) => task.completed,
   ).length;
 
+  const filteredTasks = useMemo(() => {
+    if (filter === "active") {
+      return tasks.filter(
+        (task) => !task.completed,
+      );
+    }
+
+    if (filter === "completed") {
+      return tasks.filter(
+        (task) => task.completed,
+      );
+    }
+
+    return tasks;
+  }, [filter, tasks]);
+
   return (
-    <main className="app-container">
-      <section className="task-panel">
-        <header>
-          <p className="app-label">TASKFLOW</p>
+    <main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-6">
+      <div className="mx-auto max-w-3xl space-y-8">
+        <Header
+          total={tasks.length}
+          completed={completedCount}
+        />
 
-          <h1>Plan your day</h1>
-
-          <p className="summary">
-            {completedCount} of {tasks.length} tasks
-            completed
-          </p>
-        </header>
-
-        <TaskForm onCreate={handleCreate} />
+        <TaskForm onCreate={addTask} />
 
         {error && (
-          <p className="error-message">{error}</p>
+          <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+            {error}
+          </div>
         )}
 
-        <section className="task-section">
-          <h2>Your tasks</h2>
+        <section className="space-y-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-xl font-bold text-slate-900">
+              Your tasks
+            </h2>
+
+            <FilterBar
+              currentFilter={filter}
+              onChange={setFilter}
+            />
+          </div>
 
           {loading ? (
-            <p className="empty-message">
+            <div className="rounded-2xl border border-slate-200 bg-white px-6 py-12 text-center text-slate-500">
               Loading tasks...
-            </p>
+            </div>
           ) : (
             <TaskList
-              tasks={tasks}
-              onToggle={handleToggle}
-              onDelete={handleDelete}
+              tasks={filteredTasks}
+              onToggle={toggleTask}
+              onDelete={removeTask}
             />
           )}
         </section>
-      </section>
+      </div>
     </main>
   );
 }

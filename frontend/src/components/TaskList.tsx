@@ -1,5 +1,6 @@
 import type { Task } from "../types/task";
-import TaskItem from "./TaskItem";
+
+import TaskCard from "./TaskCard";
 
 interface TaskListProps {
   tasks: Task[];
@@ -14,22 +15,28 @@ export default function TaskList({
 }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <p className="empty-message">
-        No tasks yet. Add your first task.
-      </p>
+      <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+        <h3 className="font-semibold text-slate-800">
+          No tasks found
+        </h3>
+
+        <p className="mt-2 text-sm text-slate-500">
+          Create a task or change the selected filter.
+        </p>
+      </div>
     );
   }
 
   return (
-    <ul className="task-list">
+    <div className="grid gap-3">
       {tasks.map((task) => (
-        <TaskItem
+        <TaskCard
           key={task.id}
           task={task}
           onToggle={onToggle}
           onDelete={onDelete}
         />
       ))}
-    </ul>
+    </div>
   );
 }

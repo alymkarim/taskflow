@@ -1,10 +1,6 @@
-<div align="center">
-
 # 🚀 TaskFlow
 
-A modern full-stack task management application built with **FastAPI**, **React**, **TypeScript**, **PostgreSQL**, and **Docker**.
-
-Production-style CRUD application demonstrating REST APIs, database integration, testing, containerization, and cloud deployment.
+A full-stack task management application that enables users to create, organise, update, and delete tasks through a responsive web interface. The project features a React frontend communicating with a FastAPI REST API backed by a PostgreSQL database, showcasing modern full-stack application development from local development to cloud deployment.
 
 ### 🌐 Live Demo
 
@@ -26,14 +22,16 @@ Production-style CRUD application demonstrating REST APIs, database integration,
 </div>
 
 ---
+## 🎥 Demo
 
+<p align="center">
+  <img src="docs/taskflow-demo.gif" alt="TaskFlow Demo" width="900">
+</p>
 # Overview
 
-TaskFlow is a full-stack task management application built to demonstrate modern software engineering practices.
+TaskFlow is a task management web application that allows users to manage their daily tasks through a simple and responsive interface. Users can create new tasks, add optional notes, mark tasks as completed, and remove tasks they no longer need.
 
-The project separates the frontend and backend into independent services communicating through a REST API, while using PostgreSQL for persistent data storage.
-
-The application was containerized with Docker and deployed to the cloud using Vercel, Render, and Supabase.
+The frontend is built with **React** and **TypeScript**, while the backend exposes a **FastAPI REST API** that performs CRUD operations using **SQLAlchemy** and **PostgreSQL**. The application is containerized with **Docker** and deployed using **Vercel**, **Render**, and **Supabase**, following a production-style full-stack architecture.
 
 ---
 

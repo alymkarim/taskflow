@@ -13,7 +13,9 @@ app = FastAPI(
 
 @app.get("/")
 def read_root():
-    return {"message": "TaskFlow API is running"}
+    return {
+        "message": "TaskFlow API is running"
+    }
 
 
 app.include_router(tasks.router)

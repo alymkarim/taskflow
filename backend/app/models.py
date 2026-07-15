@@ -7,6 +7,6 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
     note = Column(String, nullable=True)
-    completed = Column(Boolean, default=False)
+    completed = Column(Boolean, default=False, nullable=False)
 
 #look into potential feautures like priority or tags
